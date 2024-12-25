@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Product } from "../types";
+import { Product } from "./model";
 import ProductCard from "./ProductCard";
 
 async function ProductList() {

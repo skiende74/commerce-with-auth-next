@@ -3,12 +3,9 @@ import { useState } from "react";
 
 export default function ProductCounter() {
   const [count, setCount] = useState(0);
-  const handleAddClick = () => {
-    setCount(count + 1);
-  };
-  const handleCancelClick = () => {
-    setCount(0);
-  };
+  const handleAddClick = () => setCount(count + 1);
+
+  const handleCancelClick = () => setCount(0);
 
   return (
     <div className="flex justify-end mt-8 gap-2">

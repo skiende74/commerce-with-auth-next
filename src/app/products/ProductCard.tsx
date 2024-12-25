@@ -10,11 +10,11 @@ const ProductCard = (props: Props) => {
   return (
     <li className="card card-compact w-90 bg-base-100 shadow-xl">
       <figure className="relative h-60">
-        <img
+        <Image
           src={props.image}
           alt={props.title}
-          // width={400}
-          // height={400}
+          width={400}
+          height={400}
           style={{
             position: "absolute",
             top: 0,
