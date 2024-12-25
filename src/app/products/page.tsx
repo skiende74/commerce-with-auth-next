@@ -1,21 +1,10 @@
-"use client";
 import Link from "next/link";
 import { Product } from "../types";
 import ProductCard from "./ProductCard";
-import { useEffect, useState } from "react";
 
-function ProductList() {
-  const [products, setProducts] = useState<Product[]>([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/products`);
-      const data = await response.json();
-      setProducts(data);
-    };
-
-    fetchData();
-  }, []);
+async function ProductList() {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/products`);
+  const products = (await response.json()) as Product[];
 
   return (
     <div>

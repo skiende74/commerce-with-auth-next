@@ -1,23 +1,10 @@
-"use client";
 import ProductCard from "@/app/products/ProductCard";
 import ProductCounter from "@/app/products/[id]/ProductCounter";
-import { Product } from "@/app/types";
-import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
 
-function ProductDetail() {
-  const { id } = useParams();
-  const [product, setProduct] = useState<Product>();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/products/${id}`);
-      const data = await response.json();
-      setProduct(data);
-    };
-
-    fetchData();
-  }, [id]);
+async function ProductDetail({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/products/${id}`);
+  const product = await res.json();
 
   return (
     <div>
