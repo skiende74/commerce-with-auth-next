@@ -1,4 +1,6 @@
+"use client";
 import Image from "next/image";
+import { ReactNode } from "react";
 
 type Props = {
   title: string;
@@ -6,13 +8,22 @@ type Props = {
   description?: string;
 };
 
-const ProductCard = (props: Props) => {
+const ProductCard = ({
+  title,
+  image,
+  description,
+  children,
+  onClick,
+}: Props & { children?: ReactNode; onClick?: () => void }) => {
   return (
-    <li className="card card-compact w-90 bg-base-100 shadow-xl">
+    <li
+      className="card card-compact w-90 bg-base-100 shadow-xl"
+      onClick={onClick ?? (() => {})}
+    >
       <figure className="relative h-60">
         <Image
-          src={props.image}
-          alt={props.title}
+          src={image}
+          alt={title}
           width={400}
           height={400}
           style={{
@@ -29,9 +40,10 @@ const ProductCard = (props: Props) => {
         />
       </figure>
       <div className="card-body">
-        <h2 className="card-title">{props.title}</h2>
-        {props.description && <p>{props.description}</p>}
+        <h2 className="card-title">{title}</h2>
+        {description && <p>{description}</p>}
       </div>
+      {children}
     </li>
   );
 };

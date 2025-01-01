@@ -35,9 +35,12 @@ export default function RootLayout({
 
 function Layout({ children }: { children: ReactNode }) {
   return (
-    <div className="drawer-content flex flex-col">
-      <NavigationBar />
-      {children}
-    </div>
+    <>
+      <div className="drawer-content flex flex-col">
+        <NavigationBar />
+        {children}
+      </div>
+      <div id="modal"></div>
+    </>
   );
 }

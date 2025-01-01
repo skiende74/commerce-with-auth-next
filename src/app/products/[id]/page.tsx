@@ -1,10 +1,17 @@
 import ProductCard from "@/app/products/ProductCard";
 import ProductCounter from "@/app/products/[id]/ProductCounter";
+import { Product } from "../model";
+
+export async function getProduct(id: string) {
+  const data = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/products/${id}`, {
+    cache: "force-cache",
+  });
+  return (await data.json()) as Product;
+}
 
 async function ProductDetail({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/products/${id}`);
-  const product = await res.json();
+  const product = await getProduct(id);
 
   return (
     <div>
