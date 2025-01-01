@@ -11,6 +11,9 @@ const NavigationBar = () => {
         <li>
           <Link href="/products">상품 목록</Link>
         </li>
+        <li>
+          <Link href="/cart">장바구니</Link>
+        </li>
       </ul>
     </div>
   );

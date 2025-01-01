@@ -2,9 +2,13 @@ import Link from "next/link";
 import { Product } from "./model";
 import ProductCard from "./ProductCard";
 
-async function ProductList() {
+export async function getProducts() {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/products`, { cache: "force-cache" });
-  const products = (await response.json()) as Product[];
+  return (await response.json()) as Product[];
+}
+
+async function ProductList() {
+  const products = await getProducts();
 
   return (
     <div>
