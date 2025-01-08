@@ -1,6 +1,6 @@
 import ProductInCart from "./ProductInCart";
 
-interface Cart {
+export interface Cart {
   id: number;
   userId: number;
   date: string;
