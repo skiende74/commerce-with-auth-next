@@ -11,6 +11,10 @@ async function ProductModal({ params }: { params: Promise<{ id: string }> }) {
     <Modal
       title="상품 상세"
       isOpen={true}
+      onClose={async () => {
+        "use server";
+        // redirect("/products");
+      }}
     >
       <ProductCard {...product} />
     </Modal>

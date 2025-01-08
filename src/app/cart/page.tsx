@@ -25,14 +25,25 @@ async function page() {
     <div>
       <h2 className="text-center">장바구니</h2>
       <div>
-        <ul>
-          {firstCart.products.map((product) => (
-            <ProductInCart
-              key={product.productId}
-              {...product}
-            />
-          ))}
-        </ul>
+        <table className="table">
+          <thead>
+            <tr>
+              <td>상품</td>
+              <td>상품명</td>
+              <td>수량</td>
+              <td>가격</td>
+              <td>총 가격</td>
+            </tr>
+          </thead>
+          <tbody>
+            {firstCart.products.map((product) => (
+              <ProductInCart
+                key={product.productId}
+                {...product}
+              />
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );
