@@ -1,30 +1,35 @@
 "use server";
 import { cookies } from "next/headers";
 import { User } from "./model/user";
+import { supabase } from "@/workspace/supabase";
+import jwt from "jsonwebtoken";
 
 const users: User[] = [{ email: "email1@naver.com", password: "password", name: "홍길동" }];
 
 export async function postLogin(state: string | null, formData: FormData) {
-  const user = users.find((user) => user.email === formData.get("email") && user.password === formData.get("password"));
+  const [email, password] = [formData.get("email"), formData.get("password")];
+
+  const user = supabase.from("user_table").insert({ email, password });
 
   if (user == null) return null;
 
-  const [refreshToken, accessToken] = [crypto.randomUUID(), crypto.randomUUID()];
+  const { refreshToken, accessToken } = makeToken(email as string);
   const cookieStore = await cookies();
   cookieStore.set({ name: "refreshToken", value: refreshToken, httpOnly: true, secure: true });
 
   return accessToken;
 }
 
-function makeToken() {
-  const [refreshToken, accessToken] = [crypto.randomUUID(), crypto.randomUUID()];
-  return { refreshToken, accessToken };
+function makeToken(email: string) {
+  const accessToken = jwt.sign({ email }, process.env.PRIVATE_KEY, { expiresIn: "24h" });
+  const refreshToken = jwt.sign({ email }, process.env.PRIVATE_KEY, { expiresIn: 3600 * 24 * 7 });
+  return { accessToken, refreshToken };
 }
 
 // TODO : user[0]으로해뒀는데일단. accessToken 데이터를쓰도록고치기
 export async function getUser({ accessToken }: { accessToken: string }) {
-  const user = users.find((user) => user.email === users[0].email);
-  return user;
+  supabase.from("user_table").select("*").like("email", email);
+  //  return user;
 }
 
 export async function reissueAccessToken() {
