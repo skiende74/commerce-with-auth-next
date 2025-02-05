@@ -4,10 +4,10 @@ import { User } from "./model/user";
 
 const users: User[] = [{ email: "email1@naver.com", password: "password", name: "홍길동" }];
 
-export async function postLogin(state: string | undefined, formData: FormData) {
-  const user = users.find((user) => user.email === formData.get("email"));
+export async function postLogin(state: string | null, formData: FormData) {
+  const user = users.find((user) => user.email === formData.get("email") && user.password === formData.get("password"));
 
-  if (user == null) return undefined;
+  if (user == null) return null;
 
   const [refreshToken, accessToken] = [crypto.randomUUID(), crypto.randomUUID()];
   const cookieStore = await cookies();
@@ -15,6 +15,7 @@ export async function postLogin(state: string | undefined, formData: FormData) {
 
   return accessToken;
 }
+
 function makeToken() {
   const [refreshToken, accessToken] = [crypto.randomUUID(), crypto.randomUUID()];
   return { refreshToken, accessToken };

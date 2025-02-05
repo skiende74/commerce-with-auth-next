@@ -1,6 +1,7 @@
 "use client";
-import React from "react";
-import AuthGuard from "./AuthGuard";
+import dynamic from "next/dynamic";
+
+const AuthGuard = dynamic(() => import("./AuthGuard"), { ssr: false });
 
 function MyInfo() {
   return (

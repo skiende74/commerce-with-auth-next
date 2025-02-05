@@ -18,9 +18,7 @@ const NavigationBar = () => {
         <li>
           <Link href="/cart">장바구니</Link>
         </li>
-        <li>
-          {isSuccess && accessToken ? <Link href="/login/myinfo">내 정보</Link> : <Link href="/login">로그인</Link>}
-        </li>
+        <li>{isSuccess && accessToken ? <Link href="/myinfo">내 정보</Link> : <Link href="/login">로그인</Link>}</li>
       </ul>
     </div>
   );

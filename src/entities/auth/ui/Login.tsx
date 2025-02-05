@@ -28,10 +28,10 @@ function Login() {
   const [password, setPassword] = useState("");
   // const { mutate } = useLoginMutation({ id: email, password });
 
-  const [token, dispatch, isPending] = useActionState(postLogin, undefined);
+  const [token, dispatch, isPending] = useActionState(postLogin, null);
 
   if (token) {
-    redirect("/login/myinfo");
+    redirect("/myinfo");
   }
   return (
     <article className="inline-block p-8 border-solid border-2 border-gray-200 ">
@@ -64,6 +64,8 @@ function Login() {
           >
             로그인
           </button>
+          {isPending && "로그인 중.."}
+          {token === null && <div className="text-red-400 text-xs">email 또는 password가 잘못되었습니다.</div>}
         </div>
       </form>
     </article>
