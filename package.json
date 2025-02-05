@@ -6,13 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "typegen": "dotenv -e .env -- bash -c \"npx supabase gen types typescript --project-id $DB_PROJECT_ID --schema public > database.types.ts\""
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.48.1",
     "@tanstack/react-query": "^5.62.16",
     "@tanstack/react-query-devtools": "^5.62.16",
-    "dotenv": "^16.4.7",
     "jsonwebtoken": "^9.0.2",
     "msw": "^2.7.0",
     "next": "15.1.2",
@@ -29,6 +29,7 @@
     "@typescript-eslint/parser": "^8.18.2",
     "autoprefixer": "^10.4.20",
     "daisyui": "^4.12.22",
+    "dotenv-cli": "^8.0.0",
     "eslint": "^9",
     "eslint-config-next": "15.1.2",
     "eslint-plugin-react-hooks": "^5.1.0",

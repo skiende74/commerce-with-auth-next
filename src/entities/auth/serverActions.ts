@@ -9,7 +9,7 @@ const users: User[] = [{ email: "email1@naver.com", password: "password", name: 
 export async function postLogin(state: string | null, formData: FormData) {
   const [email, password] = [formData.get("email"), formData.get("password")];
 
-  const user = supabase.from("user_table").insert({ email, password });
+  const user = supabase.from("user_table").insert({email,password});
 
   if (user == null) return null;
 
@@ -28,7 +28,7 @@ function makeToken(email: string) {
 
 // TODO : user[0]으로해뒀는데일단. accessToken 데이터를쓰도록고치기
 export async function getUser({ accessToken }: { accessToken: string }) {
-  supabase.from("user_table").select("*").like("email", email);
+  supabase.from("user_table").select("*").like("email",email)
   //  return user;
 }
 
