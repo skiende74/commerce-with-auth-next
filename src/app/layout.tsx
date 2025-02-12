@@ -5,6 +5,8 @@ import "./reset.css";
 import { ReactNode } from "react";
 import NavigationBar from "./NavigationBar";
 import ReactQueryProvider from "./_component/ReactQueryProvider";
+import { AuthProvider } from "@/entities/auth/ui/AuthGuard";
+import AuthLogger from "@/entities/auth/ui/AuthLogger";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,13 +42,17 @@ export default function RootLayout({
 function Layout({ children }: { children: ReactNode }) {
   return (
     <>
-      <ReactQueryProvider>
-        <div className="drawer-content flex flex-col">
-          <NavigationBar />
-          {children}
-        </div>
-        <div id="modal"></div>
-      </ReactQueryProvider>
+      <AuthProvider>
+        <AuthLogger>
+          <ReactQueryProvider>
+            <div className="drawer-content flex flex-col">
+              <NavigationBar />
+              {children}
+            </div>
+            <div id="modal"></div>
+          </ReactQueryProvider>
+        </AuthLogger>
+      </AuthProvider>
     </>
   );
 }

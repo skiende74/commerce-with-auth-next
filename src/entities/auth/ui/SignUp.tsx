@@ -1,9 +1,13 @@
+"use client";
 import { useActionState } from "react";
-import { postSignup } from "../serverActions";
+import { postSignup } from "../authActions";
+import { redirect } from "next/navigation";
 
 export function SignupForm() {
   const [state, action, pending] = useActionState(postSignup, undefined);
-
+  if (state) {
+    redirect("/");
+  }
   return (
     <form action={action}>
       <div>
