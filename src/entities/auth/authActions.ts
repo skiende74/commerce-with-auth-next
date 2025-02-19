@@ -27,7 +27,7 @@ export async function postSignup(state: User | undefined, formData: FormData) {
     password: formData.get("password"),
   } as User;
 
-  const res = await supabase.from("user_table").insert({email:user.email,password:user.password, id:1,registered_at:new Date().toISOString()});
+  await supabase.from("user_table").insert({email:user.email,password:user.password, registered_at:new Date().toISOString()});
   
   return user;
 }

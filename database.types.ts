@@ -9,6 +9,51 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      cart: {
+        Row: {
+          id: number
+          item_id: number | null
+          user_id: number | null
+        }
+        Insert: {
+          id?: never
+          item_id?: number | null
+          user_id?: number | null
+        }
+        Update: {
+          id?: never
+          item_id?: number | null
+          user_id?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "cart_item_id_fkey"
+            columns: ["item_id"]
+            isOneToOne: false
+            referencedRelation: "item"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "cart_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "user_table"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      item: {
+        Row: {
+          id: number
+        }
+        Insert: {
+          id?: never
+        }
+        Update: {
+          id?: never
+        }
+        Relationships: []
+      }
       user_table: {
         Row: {
           email: string
@@ -18,13 +63,13 @@ export type Database = {
         }
         Insert: {
           email: string
-          id: number
+          id?: never
           password: string
           registered_at: string
         }
         Update: {
           email?: string
-          id?: number
+          id?: never
           password?: string
           registered_at?: string
         }
