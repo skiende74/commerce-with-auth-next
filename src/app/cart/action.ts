@@ -14,3 +14,7 @@ export async function changeQuantity(cartId: number, productId: number, quantity
     body: JSON.stringify({ userId: 2, date: Date.now().toString(), products: newProducts }),
   });
 }
+
+export async function addCart(userId:number, productId:number){
+
+}
