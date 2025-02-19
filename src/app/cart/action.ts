@@ -1,12 +1,8 @@
 "use server";
 
-import { Product } from "../products/model";
 import { getProducts } from "../products/page";
 
-export async function getProduct(productId: number) {
-  const data = await fetch(`https://fakestoreapi.com/products/${productId}`);
-  return (await data.json()) as Product;
-}
+
 
 export async function changeQuantity(cartId: number, productId: number, quantity: number) {
   "use server";

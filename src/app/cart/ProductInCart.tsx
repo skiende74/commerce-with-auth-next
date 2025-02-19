@@ -1,14 +1,15 @@
 import Image from "next/image";
 import { ProductFlat } from "./page";
-import { getProduct } from "./action";
+import { getProduct } from "../products/[id]/page";
 
 // redirect()
 // useRouter().push()
 
 async function ProductInCart({ productId, quantity }: ProductFlat) {
-  const product = await getProduct(productId);
-  // const [quantityClient, setQuantityClient] = useState(quantity);
-  const { category, description, id, image, price, title } = product;
+  const product = await getProduct(productId.toString());
+  if (product == null) return null;
+
+  const { category, description, id, image, price, title } = product!;
   return (
     <tr>
       <td>
