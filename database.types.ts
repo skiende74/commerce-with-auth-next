@@ -13,17 +13,14 @@ export type Database = {
         Row: {
           id: number
           item_id: number | null
-          user_id: number | null
         }
         Insert: {
           id?: never
           item_id?: number | null
-          user_id?: number | null
         }
         Update: {
           id?: never
           item_id?: number | null
-          user_id?: number | null
         }
         Relationships: [
           {
@@ -33,41 +30,58 @@ export type Database = {
             referencedRelation: "item"
             referencedColumns: ["id"]
           },
-          {
-            foreignKeyName: "cart_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "user_table"
-            referencedColumns: ["id"]
-          },
         ]
       }
       item: {
         Row: {
+          category: string
+          description: string
           id: number
+          image: string
+          price: number
+          rating: number | null
+          rating_count: number | null
+          title: string
         }
         Insert: {
+          category: string
+          description: string
           id?: never
+          image: string
+          price: number
+          rating?: number | null
+          rating_count?: number | null
+          title: string
         }
         Update: {
+          category?: string
+          description?: string
           id?: never
+          image?: string
+          price?: number
+          rating?: number | null
+          rating_count?: number | null
+          title?: string
         }
         Relationships: []
       }
       user_table: {
         Row: {
+          cart_id: number | null
           email: string
           id: number
           password: string
           registered_at: string
         }
         Insert: {
+          cart_id?: number | null
           email: string
           id?: never
           password: string
           registered_at: string
         }
         Update: {
+          cart_id?: number | null
           email?: string
           id?: never
           password?: string

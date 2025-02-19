@@ -1,14 +1,22 @@
 import Link from "next/link";
 import { Product } from "./model";
 import ProductCard from "./ProductCard";
+import { supabase } from "@/workspace/supabase";
 
 export async function getProducts() {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/products`, { cache: "force-cache" });
-  return (await response.json()) as Product[];
+  const response = await supabase.from("item").select("*").range(0, 19);
+  return response.data;
 }
 
+// to migrate data from fakeapi to real DB
+async function uploadProducts(products: Product[]) {
+  const newProducts = products.map(({ id: _, rating: _2, ...rest }) => ({ ...rest }));
+  console.log("add to:", newProducts);
+  await supabase.from("item").insert(newProducts);
+}
 async function ProductList() {
   const products = await getProducts();
+  // await uploadProducts(products);
 
   return (
     <div>
